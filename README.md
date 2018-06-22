@@ -6,7 +6,7 @@ Das hosts file von Windows anpassen unter ``` C:\Windows\System32\drivers\etc\ho
 ```
 # [...]
 
-127.0.0.1    my-project.local
+127.0.0.1    dracos.local
 ```
 
 Jetzt die VHosts von Apache konfigurieren. Die Datei dazu findet man unter ``` C:\xampp\apache\conf\extra\httpd-vhosts.conf ```.
@@ -22,13 +22,13 @@ NameVirtualHost *:80
 # Eigentliche VHost Konfiguration
 <VirtualHost 127.0.0.1>
     # DNS Name auf den der VHost hören soll
-    ServerName my-project.local
+    ServerName dracos.local
 
     # Ort an dem Das Projekt zu finden ist
-    DocumentRoot "c:/dev/my-project/public"
+    DocumentRoot "c:/www/dracos-webseite/public"
 
     # Nochmals
-    <Directory "c:/dev/my-project/public">
+    <Directory "c:/www/dracos-webseite/public">
         Options Indexes FollowSymLinks
         Options +Includes
         AllowOverride All
@@ -40,4 +40,4 @@ NameVirtualHost *:80
 </VirtualHost>
 ```
 
-Jetzt Apache über XAMPP neustarten und danach über ``` http://my-project.local ``` auf die Seite zugreifen.
+Jetzt Apache über XAMPP neustarten und danach über ``` http://dracos.local ``` auf die Seite zugreifen.
