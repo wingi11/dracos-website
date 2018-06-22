@@ -40,4 +40,4 @@ NameVirtualHost *:80
 </VirtualHost>
 ```
 
-Jetzt Apache über XAMPP neustarten und danach über http://my-project.local auf die Seite zugreifen.
+Jetzt Apache über XAMPP neustarten und danach über ``` http://my-project.local ``` auf die Seite zugreifen.
