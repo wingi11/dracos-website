@@ -2,6 +2,8 @@
 
 ## Installationsanleitung mit XAMPP
 
+[XAMPP](https://www.apachefriends.org/de/index.html) installieren
+
 Das hosts file von Windows anpassen unter ``` C:\Windows\System32\drivers\etc\hosts ```
 ```
 # [...]
@@ -41,3 +43,5 @@ NameVirtualHost *:80
 ```
 
 Jetzt Apache über XAMPP neustarten und danach über ``` http://dracos.local ``` auf die Seite zugreifen.
+
+Eine [Anleitung](http://devarticles.in/linux/creating-new-virtual-host-while-using-xampp-in-ubuntu-linux/) für Ubuntu.
