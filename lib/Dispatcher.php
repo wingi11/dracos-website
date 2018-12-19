@@ -48,8 +48,6 @@ class Dispatcher {
 
 		if (method_exists($controller, $method)) {
 			$controller->$method();
-
-
 		} else {
 			$errorC = new ErrorController();
 			$errorC->index();

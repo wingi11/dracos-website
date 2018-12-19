@@ -6,27 +6,34 @@ class UserRepository extends Repository {
 	/**
 	 * Schreibt einen Benutzer in die DB
 	 * @param $username
-	 * @param $password
+	 * @param $email
+     * @param $password
 	 * @return int
 	 * @throws Exception
 	 */
-	public function create($username, $password) {
+	public function create($username, $email, $password) {
 		$password = sha1($password);
-		$query = "SELECT * FROM user WHERE username = ?";
+		$query = "SELECT * FROM users WHERE username = ? OR email = ?";
 		$statement = ConnectionHandler::getConnection()->prepare($query);
-		$statement->bind_param("s", $username);
+		$statement->bind_param("ss", $username, $email);
 		$statement->execute();
 		$result = $statement->get_result();
 		while ($row = $result->fetch_object()) {
 			if ($row->username == $username) {
-				return false;
+				throw new Exception("Username already exists");
 			}
 		}
-		$query = "INSERT INTO users (username, master_password) VALUES (?, ?)";
+        $query = "INSERT INTO user_info (name, prename, date_of_birth) VALUES (null, null, null)";
+        $statement = ConnectionHandler::getConnection()->prepare($query);
+        if (!$statement->execute()) {
+            throw new Exception("Could not create new user");
+        }
+        $last_id = $statement->insert_id;
+		$query = "INSERT INTO users (username, email, password, user_info_id) VALUES (?, ?, ?, ?)";
 		$statement = ConnectionHandler::getConnection()->prepare($query);
-		$statement->bind_param('ss', $username, $password);
+		$statement->bind_param('sssi', $username, $email, $password, $last_id);
 		if (!$statement->execute()) {
-			return false;
+            throw new Exception("Could not create new user");
 		}
 		return true;
 	}
@@ -35,7 +42,6 @@ class UserRepository extends Repository {
 	 * Überprüft ob der Benutzer in der DB ist
 	 * @param $username
 	 * @param $password
-	 * @return int
 	 * @throws Exception
 	 */
 	public function login($username, $password){
@@ -44,13 +50,15 @@ class UserRepository extends Repository {
 		$statement = ConnectionHandler::getConnection()->prepare($query);
 		$statement->bind_param("ss", $username, $password);
 		if (!$statement->execute()) {
-			return false;
+			throw new Exception("Cannot login user");
 		}
 		$result = $statement->get_result();
 		if ($result->num_rows == 1) {
-			return true;
-		}
-		return false;
+            return true;
+
+		} else {
+            throw new Exception("Username or password does not exist");
+        }
 	}
 
 	/**
@@ -66,8 +74,7 @@ class UserRepository extends Repository {
 		$statement = ConnectionHandler::getConnection()->prepare($query);
 		$statement->bind_param('ss', $password, $username);
 		if (!$statement->execute()) {
-			return false;
+            throw new Exception("Could not change Password");
 		}
-		return true;
 	}
 }
