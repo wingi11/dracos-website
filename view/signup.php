@@ -30,14 +30,14 @@
                             <div class="field">
                                 <label>Password</label>
                                 <div class="ui left icon input">
-                                    <input type="password" name="password">
+                                    <input type="password" name="password" placeholder="Password">
                                     <i class="lock icon"></i>
                                 </div>
                             </div>
                             <div class="field">
                                 <label>Repeat Password</label>
                                 <div class="ui left icon input">
-                                    <input type="password">
+                                    <input type="password" name="password2" placeholder="Repeat Password">
                                     <i class="lock icon"></i>
                                 </div>
                             </div>
