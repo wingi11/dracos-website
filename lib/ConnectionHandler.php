@@ -28,7 +28,7 @@ class ConnectionHandler {
 			$password = $config['database']['password'];
 			$database = $config['database']['database'];
 
-			//initialisieren
+			// Initialisierung
 			self::$connection = new MySQLi($host, $username, $password, $database);
 			if (self::$connection->connect_error) {
 				$error = self::$connection->connect_error;
