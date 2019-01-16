@@ -45,3 +45,9 @@ NameVirtualHost *:80
 Jetzt Apache über XAMPP neustarten und danach über ``` http://dracos.local ``` auf die Seite zugreifen.
 
 Eine [Anleitung](http://devarticles.in/linux/creating-new-virtual-host-while-using-xampp-in-ubuntu-linux/) für Ubuntu.
+
+# Erstellung Datenbank mit Tabellen
+
+Erstelle auf der Seite [phpmyadmin](http://localhost/phpmyadmin) eine Datenbank mit dem Namen "dracos".
+Danach musst du den Text aus dem File dump.sql kopieren und unter SQL einfügen.
+Wenn du auf Go klickst werden alle Tabellen erstellt.
